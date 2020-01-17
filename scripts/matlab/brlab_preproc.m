@@ -13,7 +13,6 @@ eventtype,eventvalue,prestim,poststim,behavioral_data)
 
 % for more info check this tutorial: http://www.fieldtriptoolbox.org/tutorial/preprocessing/
 
-
 cfg                             = [];
 cfg.dataset                     = cfg_in.dsFileName;
 cfg.trialfun                    = 'ft_trialfun_general';
@@ -38,11 +37,9 @@ cfg.bsfreq                      = [49 51; 99 101; 149 151];
 cfg.precision                   = 'single';
 data                            = ft_preprocessing(cfg);
 
-
-% DownSample to 300Hz
+% DownSample to 300Hz [nyquist = 150]
 cfg                             = [];
 cfg.resamplefs                  = 300;
 cfg.detrend                     = 'no';
 cfg.demean                      = 'no';
 data                            = ft_resampledata(cfg, data);
-
