@@ -1,6 +1,6 @@
 %% MTA project command script to run functions through all participants
 % By Wy Ming Lin, Lab rotation/internship
-% last updated 14.02.2020
+% last updated 08 March 2020
 
 %% Settings
 
@@ -85,7 +85,7 @@ timreq              = 30 * 60;
 subjects            = [1 2 3 5 6 8 9 11 12 13 14 16 17 18 19 21 22 24 25 26 27 28 29 30 31 32 33 34 35];
 aud_subjs           = [2 3 5 6 8 11 12 13 16 21 22 24 25 26 28 29 30 31 32 34 35];
 motor_subjs         = [1 2 5 6 8 11 12 14 16 17 18 19 21 22 24 26 27 28 29 31 32 33 35];
-audmotor            = [1 2 3 5 6 8 11 12 16 21 22 24 26 28 29 31 32 34 35];
+audmotor            = [1 2 3 5 6 8 11 12 16 21 22 24 26 28 29 31 32 34 35]; % subjects with good auditory and motor sources
 
 if isa(subjs,'double')
     subjects        = subjs;
@@ -203,7 +203,7 @@ elseif strcmp(where2run,'cluster')
     
 end
 
-%% just look at the plots you saved
+%% just look at the plots in the folder
 if save_plot == 1
     close all
 end
