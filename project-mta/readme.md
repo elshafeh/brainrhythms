@@ -1,6 +1,6 @@
 info on the scripts in project-mta\
 by Wy Ming Lin, brain rhythms lab\
-updated 08 March 2020\\
+updated 08 March 2020\
 
 - scripts need the FieldTrip and obob_\cf2 ownft toolboxes (obob: {\field{\*\fldinst{HYPERLINK "https://gitlab.com/obob/obob_ownft"}}{\fldrslt \expnd0\expndtw0\kerning0
 \ul https://gitlab.com/obob/obob_ownft}}\expnd0\expndtw0\kerning0
