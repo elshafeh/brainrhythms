@@ -1,5 +1,9 @@
 function mta1_prep4coreg(subj_num,modality)
-% MTA1_PREP4COREG is the first step in analyzing the MTA data
+% MTA1_PREP4COREG is the first step in analyzing the MTA data. The function
+% takes raw data and creates a mat file containing segments of the trial
+% that will be used in creating the common spatial filter and for source
+% interpolation. This function woould need to be called for each modality
+% that you are interested in source localizing. 
 % 
 % Use as 
 %
@@ -87,8 +91,7 @@ switch modality
             data                = ft_selectdata(cfg,data);
         end
         
-        % shouldn't this be 1500?
-        % this should be correct   (cue window time) +  ( cue-stim window ) + (        RT       )
+        %                          (cue window time) +  ( cue-stim window ) + (        RT       )
         bp_time                 = (      1500        +  data.trialinfo(:,4) + data.trialinfo(:,9))/1000;
         
         % convert to sample

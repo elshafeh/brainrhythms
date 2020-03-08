@@ -26,7 +26,7 @@ ft_defaults;
 addpath /home/mrphys/wylin/toolboxes/obob_ownft/
 obob_init_ft;
 
-outpath                = '/project/3016057.03/project_mta/output/'; % where the data is stored from the previous functions
+outpath                = '/project/3016057.03/project_mta/output/'; 
 savepath               = '/project/3016057.03/project_mta/output/sourceanalysis/';
 
 %% load data from the other functions
@@ -41,15 +41,12 @@ load([outpath 'coreg/s' num2str(subj_num) '_mri_coreged.mat']);
 cfg                     = [];
 cfg.headmodel           = headmodel;
 cfg.reducerank          = 2;
-cfg.resolution          = 0.01; % cm resolution
+cfg.resolution          = 0.01; % cm resolution (units are in m)
 cfg.sourcemodel.unit    = 'm'; 
 cfg.channel             = channels_used;
 [leadfield]             = ft_prepare_leadfield(cfg,timelock_all); 
 
 %% compute the common filter
-
-% different cases will be needed here to separate motor and auditory
-% analyses (left for motor, right for auditory)
         
 cfg                     = [];
 cfg.method              = 'lcmv';
@@ -81,7 +78,7 @@ source_diff             = source_all;
 source_diff.avg.pow     = (source_post.avg.pow - source_pre.avg.pow) ./ source_pre.avg.pow;
 
 
-%% INTERPOLATE onto mri
+%% interpolate onto mri
 
 cfg                     = [];
 cfg.downsample          = 2;

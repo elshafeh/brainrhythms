@@ -1,5 +1,8 @@
 function mta2_coreg(subj_num)
-% MTA2_COREG coregisters the digitizer positions with the anatomical scan
+% MTA2_COREG coregisters the digitizer positions with the anatomical scan.
+% This uses either FieldTrip or obob_ownft. This function is also
+% independent of modality (ie. each modality would use the same output from
+% this function). 
 % 
 % Use as 
 % 
@@ -9,9 +12,9 @@ function mta2_coreg(subj_num)
 % 
 % If ft_volumerealign with cfg.method = 'interactive' or or obob_coregister
 % was already done with the interactive clicking of fiducial points, then
-% the function will automatically read this from the x_read_fidpts function
-% (you have to manually input these unfortunately). If not, then you will
-% have to do this interactively. 
+% the function will automatically read this from the mta3_read_fidpts 
+% function (you have to manually input these unfortunately). If not, then 
+% you will have to do this interactively. 
 
 %% paths
 
@@ -26,7 +29,11 @@ mridatapath             = [datapath 'orig/mri/'];
 pospath                 = [datapath 'orig/polh/'];
 savepath                = '/project/3016057.03/project_mta/output/coreg/';
 
-%% read mri data update so i can account for different file types
+%% read anatomical scans
+% because they come in different file types for each subject, loop over
+% each subject and determine file type/which initial file to read
+% read_this_mri_file can be any mri file in the folder, as long as it's in
+% the correct series, usually reading file number 100 is a safe bet 
 
 currmrifiles            = dir([mridatapath 's' num2str(subj_num)]);
 currmrifiles            = currmrifiles(3:end);
@@ -36,10 +43,10 @@ if length(currmrifiles) < 10
     filetype            = filetype{end};
     if strcmp(filetype,'nii') || strcmp(filetype,'gz')
         read_this_mri_file  = [currmrifiles(1).folder '/' currmrifiles(1).name];
-    elseif strcmp(filetype,'DCCN Skyra') % this actually yet another folder
-        currmrifiles        = dir([currmrifiles(1).folder '/' currmrifiles(1).name]); % look inside
-        currmrifiles        = dir([currmrifiles(end).folder '/' currmrifiles(end).name]); % why in the fucking world is it in yet ANOTHER folder?
-        read_this_mri_file  = [currmrifiles(100).folder '/' currmrifiles(100).name]; % 100 should be a safe bet
+    elseif strcmp(filetype,'DCCN Skyra') % one participant has a rabbit hole of folders until actual MRI data
+        currmrifiles        = dir([currmrifiles(1).folder '/' currmrifiles(1).name]); 
+        currmrifiles        = dir([currmrifiles(end).folder '/' currmrifiles(end).name]); % why is it in yet ANOTHER folder?
+        read_this_mri_file  = [currmrifiles(100).folder '/' currmrifiles(100).name]; 
     end
 else
     filetype            = split(currmrifiles(100).name,'.');
@@ -53,6 +60,7 @@ mri_raw                 = ft_read_mri(read_this_mri_file);
 mri_raw                 = ft_convert_units(mri_raw,'m');
 
 %% decide whether to use obob or fieldtrip based on pos data
+% obob works best if pos file exists for subject
 
 % check if pos file exists
 pos                     = 'obob';
@@ -66,8 +74,12 @@ end
 %% run coregistration
 
 % read fiducial points, if any
+% if you need to repeat this function for any subject for whatever reason,
+% but don't have to repeat looking for fiducial points, manually save
+% fiducial points into mta2_read_fidpts so you don't have to do this
+% interactively every time
 realign_method              = 'fiducial';
-fidpts                      = x_read_fidpts(['s' num2str(subj_num)]);
+fidpts                      = mta2_read_fidpts(['s' num2str(subj_num)]);
 if isempty(fidpts)
     warning('No fiducial points found for the participant, reverting to interactive method for volume realign.');
     realign_method          = 'interactive';

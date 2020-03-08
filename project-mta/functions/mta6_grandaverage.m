@@ -59,33 +59,33 @@ switch whichfun
         %% plot 
         freq10idx       = find(freqs == 10);
         figure;%('units','normalized','outerposition',[0 0 1 1]);
-%         
-%         x = freqs;
-%         y1_avgs = mean(rhyt_ffts);
-%         y1_sems = std(rhyt_ffts)/sqrt(size(rhyt_ffts, 1));
-%         y2_avgs = mean(rand_ffts);
-%         y2_sems = std(rand_ffts)/sqrt(size(rand_ffts, 1));
-%     
-%         % fft 0-40 Hz
-%         subplot(2,2,1);
-%         shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b');
-%         hold on;
-%         shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g');
-%         title('fft 0-40 Hz');
-%         xlabel('frequencies');
-%         ylabel('power');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
-%         
-%         % fft 0-10 Hz
-%         subplot(2,2,2);
-%         shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b');
-%         hold on;
-%         shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g');
-%         title('fft 0-10 Hz');
-%         xlabel('frequencies');
-%         ylabel('power');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
-%         
+        
+        x = freqs;
+        y1_avgs = mean(rhyt_ffts);
+        y1_sems = std(rhyt_ffts)/sqrt(size(rhyt_ffts, 1));
+        y2_avgs = mean(rand_ffts);
+        y2_sems = std(rand_ffts)/sqrt(size(rand_ffts, 1));
+    
+        % fft 0-40 Hz
+        subplot(2,2,1);
+        shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b');
+        hold on;
+        shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g');
+        title('fft 0-40 Hz');
+        xlabel('frequencies');
+        ylabel('power');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
+        % fft 0-10 Hz
+        subplot(2,2,2);
+        shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b');
+        hold on;
+        shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g');
+        title('fft 0-10 Hz');
+        xlabel('frequencies');
+        ylabel('power');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
         x = freqs;
         y1_avgs = mean(rhyt_itcs);
         y1_sems = std(rhyt_itcs)/sqrt(size(rhyt_itcs, 1));
@@ -151,60 +151,60 @@ switch whichfun
         freq10idx       = find(freqs==15);
         figure;%('units','normalized','outerposition',[0 0 1 1]);
         
-%         x = freqs;
-%         y1_avgs = mean(cohs_rhyt);
-%         y1_sems = std(cohs_rhyt)/sqrt(size(cohs_rhyt, 1));
-%         y2_avgs = mean(cohs_rand);
-%         y2_sems = std(cohs_rand)/sqrt(size(cohs_rand, 1));
+        x = freqs;
+        y1_avgs = mean(cohs_rhyt);
+        y1_sems = std(cohs_rhyt)/sqrt(size(cohs_rhyt, 1));
+        y2_avgs = mean(cohs_rand);
+        y2_sems = std(cohs_rand)/sqrt(size(cohs_rand, 1));
         
-%         % coh 0-40 Hz
-%         subplot(2,2,1);
-%         shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b')
-%         hold on;
-%         shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g')
-%         title('coherence 0-40 Hz');
-%         xlabel('frequencies');
-%         ylabel('coherence');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
-%         
-        % coh 0-10 hz
-%         subplot(2,2,2);
-%         shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b')
-%         hold on;
-%         shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g')
-%         hold off;
-%         title('coherence 0-10 Hz');
-%         xlabel('frequencies');
-%         ylabel('coherence');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
-%         
+        % coh 0-40 Hz
+        subplot(2,2,1);
+        shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b')
+        hold on;
+        shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g')
+        title('coherence 0-40 Hz');
+        xlabel('frequencies');
+        ylabel('coherence');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
+        coh 0-10 hz
+        subplot(2,2,2);
+        shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b')
+        hold on;
+        shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g')
+        hold off;
+        title('coherence 0-10 Hz');
+        xlabel('frequencies');
+        ylabel('coherence');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
         x = freqs;
         y1_avgs = mean(ppcs_rhyt);
         y1_sems = std(ppcs_rhyt)/sqrt(size(ppcs_rhyt, 1));
         y2_avgs = mean(ppcs_rand);
         y2_sems = std(ppcs_rand)/sqrt(size(ppcs_rand, 1));
-% %         
-%         % ppc 0-40 Hz
-%         subplot(2,2,3);
-%         shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b')
-%         hold on;
-%         shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g')
-%         hold off;
-%         title('ppc 0-40 Hz');
-%         xlabel('frequencies');
-%         ylabel('ppc');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
+        % ppc 0-40 Hz
+        subplot(2,2,3);
+        shadedErrorBar(x, y1_avgs, y1_sems, 'lineprops','-b')
+        hold on;
+        shadedErrorBar(x, y2_avgs, y2_sems, 'lineprops','-g')
+        hold off;
+        title('ppc 0-40 Hz');
+        xlabel('frequencies');
+        ylabel('ppc');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
+        
+        % ppc 0-10 Hz
+        subplot(2,2,4);
+        shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b')
+        hold on;
+        shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g')
+        title('ppc 0-10 Hz');
+        xlabel('frequencies');
+        ylabel('ppc');
+        legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
 %         
-%         % ppc 0-10 Hz
-%         subplot(2,2,4);
-%         shadedErrorBar(x(1:freq10idx), y1_avgs(1:freq10idx), y1_sems(1:freq10idx), 'lineprops','-b')
-%         hold on;
-%         shadedErrorBar(x(1:freq10idx), y2_avgs(1:freq10idx), y2_sems(1:freq10idx), 'lineprops','-g')
-%         title('ppc 0-10 Hz');
-%         xlabel('frequencies');
-%         ylabel('ppc');
-%         legend({'rhythmic','random'},'orientation','horizontal','location','southoutside');
-% %         
 end
 
 

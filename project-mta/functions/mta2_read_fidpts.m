@@ -1,5 +1,5 @@
-function fidpts = x_read_fidpts(subj)
-%% read fiducial points into the mta_coreg function
+function fidpts = mta2_read_fidpts(subj)
+%% read fiducial points into the mta2_coreg function
 
 %% fiducial points
 

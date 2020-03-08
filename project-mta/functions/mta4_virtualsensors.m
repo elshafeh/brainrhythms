@@ -42,6 +42,9 @@ load([outpath 'sourceanalysis/s' num2str(subj_num) '_' modality '_sourceanalysis
 
 
 %% position of the max source in the appropriate hemisphere + name of source
+% usually will just take the max source position, but if there are more
+% than one lickely source positions, brute force manual clicking was done
+% to find max position of the appropriate source
 
 switch modality
     case 'auditory'
@@ -125,12 +128,13 @@ data_source_clean       = ft_selectdata(cfg,data_source_clean);
 switch tlock
     case 'cueonset'
         % do nothing, already time locked to cue onset
+        
     case 'cueoffset'
         cfg             = [];
         cfg.offset      = -(data_source.fsample * 1.5);
         data_source_clean = ft_redefinetrial(cfg,data_source_clean);
+        
     case 'target'
-        % lock to target
         %                 (last cue time) + (       cue - stim window       )
         bp_time         = (     1500      +  data_source_clean.trialinfo(:,4))/1000;
 
@@ -153,9 +157,7 @@ cfg                     = [];
 cfg.latency             = twin;
 data_segment            = ft_selectdata(cfg,data_source_clean);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% power analysis on virtual channel
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % only correct trials and equalize number 
 f1                      = find(data_segment.trialinfo(:,2)==4 & data_segment.trialinfo(:,8)==1); % rhythmic and correct
@@ -184,9 +186,7 @@ rhyt_fft                = ft_freqanalysis(cfg,data_segment);
 cfg.trials              = tf2;
 rand_fft                = ft_freqanalysis(cfg,data_segment);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% itc on the virtual channel
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % frequency analysis on the cue window
 cfg                     = [];
