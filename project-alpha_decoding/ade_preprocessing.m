@@ -1,4 +1,5 @@
-% Preprocesses and downsamples raw MEG data: Additya
+% Preprocesses and downsamples raw MEG data for an individual subject 
+% created by Additya
 %%
 clear ; clc ; clearvars ;
 
